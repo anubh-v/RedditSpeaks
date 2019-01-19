@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/"
+      ZC.LICENSE = [
+        "569d52cefae586f634c54f86dc99e6a9",
+        "ee6b7db5b51705a13dc2339db3edaf6d"
+      ]
+    </script>
+  </head>
+
+  <body>
+    <div>test</div>
+    <div id="myChart"></div>
+  </body>
+
+  <script type="text/javascript">
+    var arr = {{ data | safe}}
+    console.log(arr)
+    var wordArr = [
+      {
+        text: "hello",
+        count: 10
+      },
+      {
+        text: "test",
+        count: 89
+      }
+    ]
+    var myConfig = {
+      type: "wordcloud",
+      options: {
+        words: arr
+      }
+    }
+
+    zingchart.render({
+      id: "myChart",
+      data: myConfig,
+      height: 500,
+      width: "100%"
+    })
+  </script>
+</html>
