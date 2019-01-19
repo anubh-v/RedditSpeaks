@@ -2,7 +2,8 @@ from psaw import PushshiftAPI
 import datetime as dt
 import nltk
 import json
-from tokenizer import tokenize
+from modules.tokenizer import tokenize
+from modules.objectify import make_object_array
 
 def extract_data():
   api = PushshiftAPI()
@@ -10,7 +11,7 @@ def extract_data():
   start = int(dt.datetime(2018, 6, 1).timestamp())
   end = int(dt.datetime(2018, 6, 10).timestamp())
 
-  gen = api.search_submissions(after=start, before=end, subreddit='worldnews')
+  gen = api.search_submissions(after=start, before=end, subreddit='singapore')
   results = list(gen)
 
   print(len(results))
@@ -23,7 +24,6 @@ def extract_data():
 
 
   freq = nltk.FreqDist(data['titles'])
+  
   print(freq.most_common(50))
-
-  with open('results.json', 'w') as outfile:
-      json.dump(data, outfile)
+  return make_object_array(freq.most_common(50))
