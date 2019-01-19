@@ -1,6 +1,7 @@
 from psaw import PushshiftAPI
 import datetime as dt
 import json
+from tokenizer import tokenize
 
 api = PushshiftAPI()
 
@@ -17,11 +18,9 @@ data = {}
 data['titles'] = []
 
 for result in results:
-  print(result.title)
-  data['titles'].append(result.title)
-  print(result.selftext)
+    print(result.title)
+    data['titles'].append(tokenize(result.title))
+    print(result.selftext)
 
 with open('results.json', 'w') as outfile:
     json.dump(data, outfile)
-
-
