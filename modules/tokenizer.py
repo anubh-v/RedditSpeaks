@@ -4,10 +4,12 @@ from nltk.stem import LancasterStemmer
 import string
 
 # return an array of tokens (with stopwords and punctuation filtered, stemed)
+
+
 def tokenize(sentence):
-    
-    MISC_STOPWORDS = ["'s", "http", "https"]
-     
+
+    MISC_STOPWORDS = ["'s", "http", "https", "‘", "’"]
+
     tokens = word_tokenize(sentence)
 
     tokens = [w.lower() for w in tokens]
