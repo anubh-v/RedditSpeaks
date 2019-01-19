@@ -1,4 +1,4 @@
-# RedditSpeaks
+# RedditSpeaks - Find out what Reddit is saying
 RedditSpeaks is a project about extracting results and relationships from the data available on Reddit.
 
 Problem areas being considered:
