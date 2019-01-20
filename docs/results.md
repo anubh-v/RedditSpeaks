@@ -8,7 +8,10 @@ A Reddit forum about US news, over the last week of September 2018:
 ![Word cloud from a Reddit forum about US news, over the last week of Sept 2018](../visuals/politicsNovDec2018.jpg)
 
 A Reddit forum about world news, over Nov 2018 - Dec 2018:
-![World cloud from /r/worldnews, over Nov 2018 - Dec 2018](../visuals/worldnewsNovDec2018.png)
+![Word cloud from /r/worldnews, over Nov 2018 - Dec 2018](../visuals/worldnewsNovDec2018.png)
+
+A Reddit forum about computer science career questions, over Nov 2018 - Dec 2018:
+![Word cloud from /r/cscareerquestions, over Nov 2018 - Dec 2018](../visuals/cscareerquestionsNovDec2018.png)
 
 A Reddit forum about privacy, over Nov 2018 - Dec 2018:
 ![World cloud from /r/privacy, over Nov 2018 - Dec 2018](../visuals/privacyNovDec2018.png)
