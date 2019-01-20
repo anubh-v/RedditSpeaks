@@ -13,7 +13,7 @@ A Reddit forum about the United Kingdom, over Nov 2018  - Dec 2018:
 ![World cloud from /r/unitedkingdom,  over Nov 2018 - Dec 2018](../visuals/unitedkingdomNovDec2018.png)
 
 A Reddit forum about data analysis, over Nov 2018 - Dec 2018:
-![World clouds from /r/dataisbeautiful, over Nov 2018 - Dec 2018](../visuals/dataisbeautiful.png)
+![World clouds from /r/dataisbeautiful, over Nov 2018 - Dec 2018](../visuals/dataisbeautifulNovDec2018.png)
 
 **"OC" is a common abbreviation used, meaning "Original Content"**
 
