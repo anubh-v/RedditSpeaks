@@ -8,3 +8,5 @@ Problem areas being considered:
 - Identifying trends across time in various Reddit communities
 - Tracking the popularity of various topics across geospatial boundaries
 - Tracking community activity over time
+
+View some results [here](docs/results.md)
