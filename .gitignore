@@ -2,3 +2,5 @@
 */__pycache__
 *.py.swp
 results.json
+.vscode
+venv
