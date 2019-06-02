@@ -1,12 +1,21 @@
 import React from "react"
+import { Route, BrowserRouter, Switch } from "react-router-dom"
+import Home from "./components/Home"
+import About from "./components/About"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="title">Welcome to RedditSpeaks</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <h1 className="title">Welcome to RedditSpeaks</h1>
+        </header>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   )
 }
 
