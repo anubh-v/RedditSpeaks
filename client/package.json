@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
+    "react-d3-cloud": "^0.7.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "zingchart-react": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
