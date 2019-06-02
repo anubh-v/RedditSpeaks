@@ -18,7 +18,7 @@ class WordCloud extends Component {
       <div id="myChart" className="container">
         <h5 className="wordcloud-title center"> Generated WordCloud </h5>
         <D3WordCloud
-          data={this.state.freqDist}
+          data={this.props.freqDist}
           fontSizeMapper={fontSizeMapper}
           rotate={rotate}
         />

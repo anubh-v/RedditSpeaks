@@ -10,12 +10,18 @@ class Home extends Component {
 
   componentDidMount = () => {
     console.log("Home component mounted")
-    axios.get(path).then(res => {
-      console.log(res)
-      // this.setState({
-      //   freqDist: res.data
-      // })
-    })
+    axios
+      .get(path)
+      .then(res => {
+        console.log(res)
+        this.setState({
+          freqDist: JSON.parse(res.data)
+        })
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.error(error)
+      })
   }
 
   render() {
@@ -23,7 +29,10 @@ class Home extends Component {
       <div>
         <div className="container home">
           <h2 className="center">Home</h2>
-          <WordCloud className="container wordcloud" />
+          <WordCloud
+            freqDist={this.state.freqDist}
+            className="container wordcloud"
+          />
         </div>
       </div>
     )
