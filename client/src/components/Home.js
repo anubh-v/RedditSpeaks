@@ -1,5 +1,8 @@
 import React, { Component } from "react"
 import WordCloud from "./WordCloud"
+import axios from "axios"
+
+const path = "http://localhost:5000/freqdist"
 class Home extends Component {
   state = {
     freqDist: []
@@ -7,6 +10,12 @@ class Home extends Component {
 
   componentDidMount = () => {
     console.log("Home component mounted")
+    axios.get(path).then(res => {
+      console.log(res)
+      // this.setState({
+      //   freqDist: res.data
+      // })
+    })
   }
 
   render() {

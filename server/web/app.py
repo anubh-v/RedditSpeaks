@@ -17,7 +17,7 @@ def ping_pong():
     return jsonify('pong!')
 
 
-@app.route('/freqDist', methods=['GET'])
+@app.route('/freqdist', methods=['GET'])
 def getfreqDist():
     data = extract_data()
     return jsonify(data)
