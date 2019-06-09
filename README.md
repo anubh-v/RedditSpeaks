@@ -10,3 +10,11 @@ Problem areas being considered:
 - Tracking community activity over time
 
 View some results [here](docs/results.md)
+
+# Usage of `cli.py`
+
+To download Reddit submissions from the Pushshift API, run:
+`python cli.py <subreddit name> --start <year, month, day> --end <year, month, day> --output <path to output file>`
+
+To extract names from these downloaded submissions, rub:
+`python cli.py --input <path to input file> --output <path to output file>
