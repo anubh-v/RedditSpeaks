@@ -37,3 +37,8 @@ between 1 March 2019 and 2 March 2019, run: `python cli.py pull politics --start
 
 To extract names, run:
 `python cli.py names --input politics.json --output names.json`
+
+In this example, the following are the top 10 extracted names:
+
+| Name | Number of associated titles |
+
