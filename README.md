@@ -40,5 +40,15 @@ To extract names, run:
 
 In this example, the following are the top 10 extracted names:
 
-| Name | Number of associated titles |
-
+| Name       | Number of associated titles | 
+| ------------- |-----:|
+| trump |267|
+| michael cohen|100|
+| cohen | 68|
+|kim jong| 44 |
+|house| 39|
+|otto warmbier| 35|
+|north korea| 34|
+|donald trump|27|
+|jay inslee|23|
+|senate|23|
