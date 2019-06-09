@@ -63,8 +63,20 @@ def perform_name_extraction(submissions, output_path):
 
   sorted_submissions[0] = [sorted_submissions[0]]
 
+  """
+  Merge named submissions that are associated with the same name.
+  """
+
   flattened = reduce(flatten, sorted_submissions)
- 
+
+  """
+  Sort named submissions, in order of number of comments associated with 
+  each name.
+  """
+  
+  flattened.sort(key=lambda named_submission: len(named_submission['comments']),
+                 reverse=True)
+
   with open(output_path, 'w') as outfile:
     json.dump(flattened, outfile, indent=1)
 
