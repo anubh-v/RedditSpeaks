@@ -18,9 +18,7 @@ View some results [here](docs/results.md)
 cd server
 python3 -m venv env
 source env/bin/activate
-pip3 install Flask==1.0.2 Flask-Cors==3.0.7
-pip3 install psaw
-pip3 install nltk
+pip3 install -r requirements.txt
 python3 run_app.py
 ```
 
