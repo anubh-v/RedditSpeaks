@@ -41,8 +41,8 @@ def extract_names(context):
 
 
 if __name__ == "__main__":
-    """ 
-    Create an overall ArgumentParser, which expects the user to specify a 
+    """
+    Create an overall ArgumentParser, which expects the user to specify a
     command (such as "pull" or "names")
     """
     parser = argparse.ArgumentParser()
@@ -51,26 +51,33 @@ if __name__ == "__main__":
     subparsers.required = True
 
     """
-    Create a parser for the "names" command, 
+    Create a parser for the "names" command,
     and associate it with the extract_names_command function
     """
     name_command = subparsers.add_parser('names')
-    name_command.add_argument('--input', type=str, required=True)
-    name_command.add_argument('--output', type=str, required=True)
+    name_command.add_argument('--input', type=str, required=True,
+                              help='a path to a file containing \
+                                    downloaded reddit data')
+
+    name_command.add_argument('--output', type=str, required=True,
+                              help='a location for storing results')
+
     name_command.set_defaults(handler=extract_names)
 
-    """ Create a parser for the "pull" command, 
+    """ Create a parser for the "pull" command,
     and associate it with the pull_data_command function
     """
     pull_command = subparsers.add_parser('pull')
-    pull_command.add_argument('subreddit', type=str)
+    pull_command.add_argument('subreddit', type=str,
+                              help="a subreddit's name")
+
     pull_command.add_argument('--start', nargs="+", type=str, required=True)
     pull_command.add_argument('--end', nargs="+", type=str, required=True)
     pull_command.add_argument('--output', type=str, required=True)
     pull_command.set_defaults(handler=pull_data)
 
     """
-    Parse the user input into a "context" object that encapsulates 
+    Parse the user input into a "context" object that encapsulates
     the arguments and options specified in the input
     """
     context = parser.parse_args()
