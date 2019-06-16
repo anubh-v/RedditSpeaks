@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Abstraction-Support-Group/RedditSpeaks.svg?branch=master)](https://travis-ci.org/Abstraction-Support-Group/RedditSpeaks)
+
 # RedditSpeaks - Find out what Reddit is saying
 
 Reddit is a platform for hosting interest or place based communities.
