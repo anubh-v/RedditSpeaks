@@ -1,3 +1,22 @@
+"""
+This module provides a command line interface to download reddit data
+and perform NLP tasks on them.
+
+Usage syntax: python cli.py <command> <arguments>
+
+Current commands:
+    1. pull - download Reddit submissions and save to a file.
+    2. names - extract names from Reddit submissions, loaded from a file.
+
+To download Reddit submissions, run: 
+python cli.py pull <subreddit name> --start <year, month, day> --end <year, month, day> --output <path to output file>
+
+To extract names from these downloaded submissions, run: 
+python cli.py names --input <path to input file> --output <path to output file>
+
+
+"""
+
 import argparse
 
 from etl import Client, Tasks
