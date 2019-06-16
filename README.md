@@ -11,6 +11,26 @@ Problem areas being considered:
 
 View some results [here](docs/results.md)
 
+
+## Run
+
+### server side(run on port 5000(consider making this dynamic))
+```sh
+cd server
+python3 -m venv env
+source env/bin/activate
+pip3 install -r requirements.txt
+python3 run_app.py
+```
+
+### client side(run on port 3000)
+```sh
+cd client
+npm install
+npm run start
+```
+
+
 ## Usage of `cli.py`
 
 `cli.py` is meant for performing NLP tasks from command line.
@@ -52,3 +72,4 @@ In this example, the following are the top 10 extracted names:
 |donald trump|27|
 |jay inslee|23|
 |senate|23|
+
