@@ -14,7 +14,6 @@ python cli.py pull <subreddit name> --start <year, month, day> --end <year, mont
 To extract names from these downloaded submissions, run: 
 python cli.py names --input <path to input file> --output <path to output file>
 
-
 """
 
 import argparse
