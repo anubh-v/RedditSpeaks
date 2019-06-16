@@ -31,21 +31,30 @@ def pull(subreddit, start_date, end_date):
 
     """
 
+    # Convert the given lists into datetime objects
     start = int(datetime(*start_date).timestamp())
     end = int(datetime(*end_date).timestamp())
 
+    # This is the Pushshift API endpoint for searching Reddit submissions
     base_url = "https://api.pushshift.io/reddit/search/submission/?"
 
-    subreddit_query = "subreddit=" + subreddit
-    time_query = "&after=" + str(start) + "&before=" + str(end)
-    size_query = "&size=500"
+    # Define parameters for the HTTP GET request that will be sent to Pushshift
+    subreddit_name = "subreddit=" + subreddit
+    time_period = "&after=" + str(start) + "&before=" + str(end)
+    # Request for up to 500 results
+    requested_size = "&size=500"
 
+    """ 
+    Keep requesting for submissions till we have obtained submissions for
+    the entire time period
+    """
     while(start < end):
 
-        query_url = base_url + subreddit_query + time_query + size_query
+        query_url = base_url + subreddit_name + time_period + requested_size
         print(query_url)
 
         raw_response = requests.get(query_url)
+        # Response body will be in JSON
         json_response = json.loads(raw_response.text)
 
         if (len(json_response['data']) == 0):
