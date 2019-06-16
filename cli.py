@@ -1,6 +1,6 @@
 import argparse
 
-from modules import Client, Tasks
+from etl import Client, Tasks
 
 def pull(context):
   subreddit = context.subreddit
