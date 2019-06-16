@@ -9,4 +9,4 @@ install:
 
 # Specify tests / style checks to run
 script:
-  - flake8 server/
+ - flake8
