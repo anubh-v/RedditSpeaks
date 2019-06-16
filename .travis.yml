@@ -1,11 +1,12 @@
-# Specify language and language version
+# Specify language and language version to be used
 language: python
 python:
   - "3.6"
 
+# Specify project dependencies to be installed
 install:
   - pip install -r server/requirements.txt
 
+# Specify tests / style checks to run
 script:
   - flake8 server/
-
