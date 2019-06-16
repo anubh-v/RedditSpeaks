@@ -19,7 +19,7 @@ def pull(subreddit, start_date, end_date):
     :param subreddit: a string representing the subreddit name
     :param start_date: a list of integers representing the starting date
     :param end_date: a list of integers representing the end date
-    :yield the next submission
+    :yield the next submission (as a Python dictionary)
 
     Example:
     To download submissions from r/politics, dated between 1st March 2019,
@@ -46,7 +46,7 @@ def pull(subreddit, start_date, end_date):
 
     """ 
     Keep requesting for submissions till we have obtained submissions for
-    the entire time period
+    the entire time period specified in the query
     """
     while(start < end):
 
@@ -57,12 +57,23 @@ def pull(subreddit, start_date, end_date):
         # Response body will be in JSON
         json_response = json.loads(raw_response.text)
 
-        if (len(json_response['data']) == 0):
+        if len(json_response['data']) == 0:
+            """
+            If there are no results returned in the response, it means there are no
+            Reddit submissions in the given time period. We can stop searching.
+            """
             break
         else:
+            """
+            If there are results in the response, yield the next submission.
+            """
             for data in json_response['data']:
                 yield data
 
+        """
+        Once all results in response have been iterated through, update the time 
+        period and make another request to Pushshift.
+        """
         time.sleep(1)
         last_submission_time = json_response['data'][-1]['created_utc']
 
