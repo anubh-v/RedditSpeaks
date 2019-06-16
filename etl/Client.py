@@ -1,3 +1,9 @@
+"""
+This module provides methods to download, read and write Reddit data.
+
+Downloading is done using the Pushshift API.
+"""
+
 from datetime import datetime
 import json
 import requests
@@ -5,6 +11,25 @@ import time
 
 
 def pull(subreddit, start_date, end_date):
+    """
+    This generator function downloads Reddit submissions from Pushshift.
+    Starting from the a given date, this function yields the next available
+    submission (as a Python dictionary), until a specified date is reached.
+
+    :param subreddit: a string representing the subreddit name
+    :param start_date: a list of integers representing the starting date
+    :param end_date: a list of integers representing the end date
+    :yield the next submission
+
+    Example:
+    To download submissions from r/politics, dated between 1st March 2019,
+    and 5th March 2019, set the arguments as:
+
+    - subreddit = "politics"
+    - start_date = [2019, 3, 1]
+    - end_date = [2019, 3, 5]
+
+    """
 
     start = int(datetime(*start_date).timestamp())
     end = int(datetime(*end_date).timestamp())
