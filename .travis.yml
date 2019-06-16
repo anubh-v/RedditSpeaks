@@ -1,1 +1,11 @@
+# Specify language and language version
 language: python
+python:
+  - "3.6"
+
+install:
+  - pip install -r server/requirements.txt
+
+script:
+  - flake8 server/
+
