@@ -82,26 +82,39 @@ def pull(subreddit, start_date, end_date):
               .strftime('%Y-%m-%d %H:%M:%S'))
 
         start = last_submission_time
-        time_query = "&after=" + str(start) + "&before=" + str(end)
+        time_period = "&after=" + str(start) + "&before=" + str(end)
 
 
 def write(data_generator, output_path):
+    """
+    Given a iterator of Reddit submissions, this method writes the submissions
+    to a test file. The submissions are first cached into lists of size <cache_size>.
+    Each list is then written onto a line in the file.
 
+    :param data_generator: an iterator of Reddit submissions.
+    :param output_path: path to a text file
+    """
     cache_size = 1000
     cache = []
 
     count = 0
 
+    # Each cache is appended onto the existing file contents, in a new line.
     with open(output_path, 'a') as outfile:
         for data in data_generator:
+            # Add the next submission into the cache
             count += 1
             cache.append(data)
 
             if len(cache) > cache_size:
+                # Once the cache limit is reached, write out the cached
+                # submissions.
                 outfile.write(json.dumps(cache))
                 outfile.write('\n')
                 cache = []
 
+        # After iterating through all submissions, the cache may still be
+        # partially full. Write out these remaining submissions.
         outfile.write(json.dumps(cache))
         outfile.write('\n')
         print("Written {} submissions in total".format(count))
