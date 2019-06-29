@@ -14,7 +14,7 @@ def pull(subreddit, start_date, end_date):
     """
     This generator function downloads Reddit submissions from Pushshift.
     Starting from the a given date, this function yields the next available
-    submission (as a Python dictionary), until a specified date is reached.
+    submission (as a Python dictionary), until the specified end date is reached.
 
     :param subreddit: a string representing the subreddit name
     :param start_date: a list of integers representing the starting date
