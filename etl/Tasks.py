@@ -1,28 +1,10 @@
+"""
+This module provides methods to perform extract names from Reddit submissions.
+"""
+
 from functools import reduce
 import json
 import nltk
-
-
-def trim(submission):
-
-    # Create a new list of submissions, keeping only required fields
-    return dict(title=submission['title'], id=submission['id'])
-
-
-def extract_names(submission):
-    name_extraction_helper(submission)
-
-    """
-    Create a field for comments,
-    and treat title as a comment (for simplicity)
-    """
-    submission['comments'] = [submission['title']]
-    del submission['title']
-
-    submission['ids'] = [submission['id']]
-    del submission['id']
-
-    return submission
 
 
 def perform_name_extraction(submissions, output_path):
@@ -47,11 +29,21 @@ def perform_name_extraction(submissions, output_path):
                                   for submission in named_submissions
                                   for name in submission['names'])
 
+    """
+    Remove submissions associated with very short names.
+    These names are unlikely to be meaningful.
+    """
+
     def does_not_have_short_names(
         submission): return len(submission['name']) > 3
+
     cleaned_submissions = filter(does_not_have_short_names,
                                  unpacked_named_submissions)
 
+    """
+    Sort submissions with respect to their names (i.e. sort using the
+    submission's name as the key)
+    """
     sorted_submissions = sorted(cleaned_submissions,
                                 key=lambda submission: submission['name'])
 
@@ -77,6 +69,28 @@ def perform_name_extraction(submissions, output_path):
 
     with open(output_path, 'w') as outfile:
         json.dump(flattened, outfile, indent=1)
+
+
+def extract_names(submission):
+    name_extraction_helper(submission)
+
+    """
+    Create a field for comments,
+    and treat title as a comment (for simplicity)
+    """
+    submission['comments'] = [submission['title']]
+    del submission['title']
+
+    submission['ids'] = [submission['id']]
+    del submission['id']
+
+    return submission
+
+
+def trim(submission):
+
+    # Create a new list of submissions, keeping only required fields
+    return dict(title=submission['title'], id=submission['id'])
 
 
 def flatten(uniq_data_so_far, next_data):
