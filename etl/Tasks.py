@@ -82,7 +82,7 @@ def perform_name_extraction(submissions, output_path):
 def flatten(uniq_data_so_far, next_data):
     data_to_be_compared = uniq_data_so_far[-1]
 
-    if (data_to_be_compared['name'] != next_data['name']):
+    if data_to_be_compared['name'] != next_data['name']:
         uniq_data_so_far.append(next_data)
         return uniq_data_so_far
     else:
@@ -104,12 +104,12 @@ def name_extraction_helper(data):
 
     for i in tagged_tokens:
 
-        if (i[1] == 'NNP'):
+        if i[1] == 'NNP':
 
-            if (len(current_name) == 0):
+            if len(current_name) == 0:
                 current_name.append(i[0].lower())
 
-            elif (len(current_name) != 0):
+            elif len(current_name) != 0:
                 current_name[0] = current_name[0] + " " + i[0].lower()
 
                 completed_names.append(current_name[0])
