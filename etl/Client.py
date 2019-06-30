@@ -121,7 +121,17 @@ def write(data_generator, output_path):
 
 
 def read(input_path):
+    """
+    Given a text file containing Reddit submissions, yield the next submission,
+    as a Python dictionary. The method continues to yield the next submission,
+    until all submissions in the file have been exhausted.
 
+    The structure of the data in the text file should be similar to the structure
+    adopted in the 'write' method.
+
+    :param input_path: path to a text file containing Reddit submissions.
+    :yield: the next submission
+    """
     count = 0
 
     with open(input_path, 'r') as infile:
