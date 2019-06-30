@@ -14,7 +14,8 @@ def pull(subreddit, start_date, end_date):
     """
     This generator function downloads Reddit submissions from Pushshift.
     Starting from the a given date, this function yields the next available
-    submission (as a Python dictionary), until the specified end date is reached.
+    submission (as a Python dictionary), until the specified end date is
+    reached.
 
     :param subreddit: a string representing the subreddit name
     :param start_date: a list of integers representing the starting date
@@ -44,7 +45,7 @@ def pull(subreddit, start_date, end_date):
     # Request for up to 500 results
     requested_size = "&size=500"
 
-    """ 
+    """
     Keep requesting for submissions till we have obtained submissions for
     the entire time period specified in the query
     """
@@ -59,8 +60,9 @@ def pull(subreddit, start_date, end_date):
 
         if len(json_response['data']) == 0:
             """
-            If there are no results returned in the response, it means there are no
-            Reddit submissions in the given time period. We can stop searching.
+            If there are no results returned in the response, it means there
+            are no Reddit submissions in the given time period.
+            We can stop searching.
             """
             break
         else:
@@ -71,8 +73,8 @@ def pull(subreddit, start_date, end_date):
                 yield data
 
         """
-        Once all results in response have been iterated through, update the time 
-        period and make another request to Pushshift.
+        Once all results in response have been iterated through, update the
+        time period and make another request to Pushshift.
         """
         time.sleep(1)
         last_submission_time = json_response['data'][-1]['created_utc']
@@ -88,7 +90,8 @@ def pull(subreddit, start_date, end_date):
 def write(data_generator, output_path):
     """
     Given a iterator of Reddit submissions, this method writes the submissions
-    to a test file. The submissions are first cached into lists of size <cache_size>.
+    to a test file. The submissions are first cached into lists of
+    size <cache_size>.
     Each list is then written onto a line in the file.
 
     :param data_generator: an iterator of Reddit submissions.
@@ -126,8 +129,8 @@ def read(input_path):
     as a Python dictionary. The method continues to yield the next submission,
     until all submissions in the file have been exhausted.
 
-    The structure of the data in the text file should be similar to the structure
-    adopted in the 'write' method.
+    The structure of the data in the text file should be similar to the
+    structure adopted in the 'write' method.
 
     :param input_path: path to a text file containing Reddit submissions.
     :yield: the next submission
