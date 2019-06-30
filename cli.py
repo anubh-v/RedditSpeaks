@@ -22,7 +22,7 @@ import argparse
 from etl import Client, Tasks
 
 
-def pull(context):
+def pull_data(context):
     subreddit = context.subreddit
     start_date = list(map(int, context.start))
     end_date = list(map(int, context.end))
@@ -32,7 +32,7 @@ def pull(context):
     Client.write(data_store, output_path)
 
 
-def names(context):
+def extract_names(context):
     input_path = context.input
     output_path = context.output
 
@@ -41,21 +41,45 @@ def names(context):
 
 
 if __name__ == "__main__":
+    """
+    Create an overall ArgumentParser, which expects the user to specify a
+    command (such as "pull" or "names")
+    """
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command')
+    # The user must specify a command
     subparsers.required = True
 
+    """
+    Create a parser for the "names" command,
+    and associate it with the extract_names_command function
+    """
     name_command = subparsers.add_parser('names')
-    name_command.add_argument('--input', type=str, required=True)
-    name_command.add_argument('--output', type=str, required=True)
-    name_command.set_defaults(func=names)
+    name_command.add_argument('--input', type=str, required=True,
+                              help='a path to a file containing \
+                                    downloaded reddit data')
 
+    name_command.add_argument('--output', type=str, required=True,
+                              help='a location for storing results')
+
+    name_command.set_defaults(handler=extract_names)
+
+    """ Create a parser for the "pull" command,
+    and associate it with the pull_data_command function
+    """
     pull_command = subparsers.add_parser('pull')
-    pull_command.add_argument('subreddit', type=str)
+    pull_command.add_argument('subreddit', type=str,
+                              help="a subreddit's name")
+
     pull_command.add_argument('--start', nargs="+", type=str, required=True)
     pull_command.add_argument('--end', nargs="+", type=str, required=True)
     pull_command.add_argument('--output', type=str, required=True)
-    pull_command.set_defaults(func=pull)
+    pull_command.set_defaults(handler=pull_data)
 
+    """
+    Parse the user input into a "context" object that encapsulates
+    the arguments and options specified in the input
+    """
     context = parser.parse_args()
-    context.func(context)
+    # Run the handler function associated with the user's chosen command
+    context.handler(context)
