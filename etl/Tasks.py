@@ -8,8 +8,21 @@ import nltk
 
 
 def perform_name_extraction(submissions, output_path):
+    """
+    Given an iterator of Reddit submissions, identifies the names present
+    and collates the submissions associated with each name.
 
+    The collated submissions are then written to the specified file.
+
+    :param submissions: an iterator of Reddit submissions
+    :param output_path:
+    """
+
+    # remove unnecessary fields from every submission
     trimmed_submissions = map(trim, submissions)
+
+    # identify the names present in each submission
+    # a submission could be associated with more than 1 name
     with_extracted_names = map(extract_names, trimmed_submissions)
 
     # remove submissions with no identified names
@@ -48,25 +61,22 @@ def perform_name_extraction(submissions, output_path):
                                 key=lambda submission: submission['name'])
 
     """
-    for sub in sorted_submissions:
-      print(sub['ids'])
-    """
-
-    sorted_submissions[0] = [sorted_submissions[0]]
-
-    """
     Merge named submissions that are associated with the same name.
     """
+    sorted_submissions[0] = [sorted_submissions[0]]
     flattened = reduce(flatten, sorted_submissions)
+
     """
     Sort named submissions, in order of number of comments associated with
     each name.
     """
-
     flattened.sort(
         key=lambda named_submission: len(named_submission['comments']),
         reverse=True)
 
+    """
+    Write sorted named submissions to file.
+    """
     with open(output_path, 'w') as outfile:
         json.dump(flattened, outfile, indent=1)
 
