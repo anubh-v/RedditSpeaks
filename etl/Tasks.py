@@ -82,7 +82,7 @@ def perform_name_extraction(submissions, output_path):
 
 
 def extract_names(submission):
-    submission['names'] = naive_name_detector(['title']name_extraction_helper)
+    submission['names'] = naive_name_detector(submission['title'])
 
     """
     Create a field for comments,
@@ -108,11 +108,28 @@ def naive_name_detector(text):
     # text
     tagged_tokens = nltk.pos_tag(tokens)
 
-    completed_names = []
-    current_name = []
+    """
+    Now, we identify the names in the text.
+    
+    We assume that:
+     (1) all tokens tagged as singular proper nouns are part of names
+     (2) names are comprised of at most 2 singular proper nouns
+     
+    Hence, we identify names by identifying the singular proper nouns.
+    If there are 2 consecutive singular proper nouns, they are considered 1 
+    name.
+    """
+
+    # 'NNP' is nltk's code for singular proper noun
     PROPER_NOUN_SINGULAR = 'NNP'
 
-    # Identify the names in the text
+    # Create a list to store the final list of names associated with this text.
+    completed_names = []
+
+    # Create a list to store the name currently being tracked, as we iterate
+    # through the tokens.
+    current_name = []
+
     for token in tagged_tokens:
         if token[1] == PROPER_NOUN_SINGULAR:
             # If the current token is a proper noun (singular), it is either
@@ -134,11 +151,11 @@ def naive_name_detector(text):
                 completed_names.append(current_name[0])
                 current_name = []
 
-        else:
-            if current_name:
-                completed_names.append(current_name[0])
-
-                current_name = []
+        elif current_name:
+            # If the current token is NOT a proper noun (singular), it signifies
+            # the end of the current name.
+            completed_names.append(current_name[0])
+            current_name = []
 
     return completed_names
 
