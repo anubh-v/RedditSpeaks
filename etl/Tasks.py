@@ -82,7 +82,7 @@ def perform_name_extraction(submissions, output_path):
 
 
 def extract_names(submission):
-    name_extraction_helper(submission)
+    submission['names'] = naive_name_detector(['title']name_extraction_helper)
 
     """
     Create a field for comments,
@@ -110,17 +110,27 @@ def naive_name_detector(text):
 
     completed_names = []
     current_name = []
+    PROPER_NOUN_SINGULAR = 'NNP'
 
-    for i in tagged_tokens:
-
-        if i[1] == 'NNP':
-
+    # Identify the names in the text
+    for token in tagged_tokens:
+        if token[1] == PROPER_NOUN_SINGULAR:
+            # If the current token is a proper noun (singular), it is either
+            # part of the current name being tracked, or the start of a
+            # new name.
             if len(current_name) == 0:
-                current_name.append(i[0].lower())
+                # If we are not currently tracking a name, consider the current
+                # token to be the start of a new name.
+                current_name.append(token[0].lower())
 
             elif len(current_name) != 0:
-                current_name[0] = current_name[0] + " " + i[0].lower()
+                # If we are currently tracking a name, consider the current
+                # token part of it.
 
+                # Append token to the current name.
+                current_name[0] = current_name[0] + " " + token[0].lower()
+
+                # Assume each name will have at most 2 NNP tokens.
                 completed_names.append(current_name[0])
                 current_name = []
 
