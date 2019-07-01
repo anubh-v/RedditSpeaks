@@ -97,34 +97,19 @@ def extract_names(submission):
     return submission
 
 
-def trim(submission):
+def naive_name_detector(text):
 
-    # Create a new list of submissions, keeping only required fields
-    return dict(title=submission['title'], id=submission['id'])
-
-
-def flatten(uniq_data_so_far, next_data):
-    data_to_be_compared = uniq_data_so_far[-1]
-
-    if data_to_be_compared['name'] != next_data['name']:
-        uniq_data_so_far.append(next_data)
-        return uniq_data_so_far
-    else:
-        data_to_be_compared['comments'].append(next_data['comments'][0])
-        data_to_be_compared['ids'].append(next_data['ids'][0])
-        return uniq_data_so_far
-
-
-def name_extraction_helper(data):
-
+    # Create a tokenizer that creates tokens of alphanumeric characters only
+    # i.e. sets of characters with punctuation do not appear as a token
     tokenizer = nltk.RegexpTokenizer(r'\w+')
-    tokens = tokenizer.tokenize(data['title'])
+    tokens = tokenizer.tokenize(text)
+
+    # use 'part-of-speech' tagging to determine meaning of each token in the
+    # text
     tagged_tokens = nltk.pos_tag(tokens)
 
     completed_names = []
     current_name = []
-
-    # count = 0
 
     for i in tagged_tokens:
 
@@ -145,4 +130,22 @@ def name_extraction_helper(data):
 
                 current_name = []
 
-    data['names'] = completed_names
+    return completed_names
+
+
+def trim(submission):
+
+    # Create a new list of submissions, keeping only required fields
+    return dict(title=submission['title'], id=submission['id'])
+
+
+def flatten(uniq_data_so_far, next_data):
+    data_to_be_compared = uniq_data_so_far[-1]
+
+    if data_to_be_compared['name'] != next_data['name']:
+        uniq_data_so_far.append(next_data)
+        return uniq_data_so_far
+    else:
+        data_to_be_compared['comments'].append(next_data['comments'][0])
+        data_to_be_compared['ids'].append(next_data['ids'][0])
+        return uniq_data_so_far
