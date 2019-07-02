@@ -19,6 +19,10 @@ def perform_name_extraction(submissions, output_path):
     :param output_path:
     """
 
+    def trim(submission):
+        # Create a new dictionary, keeping only the title and id field
+        return dict(title=submission['title'], id=submission['id'])
+
     # remove unnecessary fields from every submission
     trimmed_submissions = map(trim, submissions)
 
@@ -96,12 +100,6 @@ def extract_names(submission):
     del submission['id']
 
     return submission
-
-
-def trim(submission):
-
-    # Create a new list of submissions, keeping only required fields
-    return dict(title=submission['title'], id=submission['id'])
 
 
 def flatten(uniq_data_so_far, next_data):
