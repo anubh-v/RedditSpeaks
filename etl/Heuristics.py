@@ -23,7 +23,7 @@ def naive_name_detector(text):
      (2) names are comprised of at most 2 singular proper nouns
 
     Hence, we identify names by identifying the singular proper nouns.
-    If there are 2 consecutive singular proper nouns, they are considered to be 
+    If there are 2 consecutive singular proper nouns, they are considered to be
     1 name.
     """
 
@@ -64,8 +64,8 @@ def naive_name_detector(text):
                 current_name = []
 
         elif current_name:
-            # If the current token is NOT a proper noun (singular), it signifies
-            # the end of the current name.
+            # If the current token is NOT a proper noun (singular), it
+            # signifies the end of the current name.
             completed_names.append(current_name[0])
             current_name = []
 
