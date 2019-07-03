@@ -59,7 +59,7 @@ def perform_name_extraction(submissions, output_path):
 
     """
     Group together named submissions which are associated with the same name.
-    
+
     """
     # Prepare named submissions for grouping
     ready_to_be_grouped = [prepare_for_grouping(submission)
@@ -81,7 +81,7 @@ def perform_name_extraction(submissions, output_path):
     Write sorted named submissions to file.
     """
     with open(output_path, 'w') as outfile:
-        json.dump(flattened, outfile, indent=1)
+        json.dump(grouped, outfile, indent=1)
 
 
 def extract_names(submission):
