@@ -19,11 +19,6 @@ def perform_name_extraction(submissions, output_path):
     :param output_path:
     """
 
-    def trim(submission):
-        # Create a new dictionary, keeping only the title and id
-        return dict(title=submission['title'],
-                    id=submission['id'])
-
     # remove unnecessary fields from every submission
     trimmed_submissions = map(trim, submissions)
 
@@ -32,7 +27,6 @@ def perform_name_extraction(submissions, output_path):
     with_extracted_names = map(extract_names, trimmed_submissions)
 
     # remove submissions with no identified names
-    def has_name(submission): return len(submission['names']) != 0
     named_submissions = filter(has_name, with_extracted_names)
 
     """
@@ -52,9 +46,6 @@ def perform_name_extraction(submissions, output_path):
     Remove submissions associated with very short names.
     These names are unlikely to be meaningful.
     """
-
-    def does_not_have_short_names(
-        submission): return len(submission['name']) > 3
 
     cleaned_submissions = filter(does_not_have_short_names,
                                  unpacked_named_submissions)
@@ -114,3 +105,17 @@ def group(uniq_data_so_far, next_data):
         data_to_be_compared['titles'].append(next_data['titles'][0])
         data_to_be_compared['ids'].append(next_data['ids'][0])
         return uniq_data_so_far
+
+
+def trim(submission):
+    # Create a new dictionary, keeping only the title and id
+    return dict(title=submission['title'],
+                id=submission['id'])
+
+
+def does_not_have_short_names(submission):
+    return len(submission['name']) > 3
+
+
+def has_name(submission):
+    return len(submission['names']) != 0
