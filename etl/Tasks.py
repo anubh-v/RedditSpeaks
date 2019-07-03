@@ -20,8 +20,9 @@ def perform_name_extraction(submissions, output_path):
     """
 
     def trim(submission):
-        # Create a new dictionary, keeping only the title and id field
-        return dict(title=submission['title'], id=submission['id'])
+        # Create a new dictionary, keeping only the title and id
+        return dict(title=submission['title'],
+                    id=submission['id'])
 
     # remove unnecessary fields from every submission
     trimmed_submissions = map(trim, submissions)
@@ -39,8 +40,8 @@ def perform_name_extraction(submissions, output_path):
     1 name each
     """
     def unpack(submission, name):
-        return dict(comments=list(submission['comments']),
-                    ids=list(submission['ids']),
+        return dict(title=submission['title'],
+                    id=submission['id'],
                     name=name)
 
     unpacked_named_submissions = (unpack(submission, name)
@@ -66,17 +67,23 @@ def perform_name_extraction(submissions, output_path):
                                 key=lambda submission: submission['name'])
 
     """
-    Merge named submissions that are associated with the same name.
+    Group together named submissions which are associated with the same name.
+    
     """
-    sorted_submissions[0] = [sorted_submissions[0]]
-    flattened = reduce(flatten, sorted_submissions)
+    # Prepare named submissions for grouping
+    ready_to_be_grouped = [prepare_for_grouping(submission)
+                           for submission in sorted_submissions]
+
+    ready_to_be_grouped[0] = list(ready_to_be_grouped[0])
+
+    grouped = reduce(group, ready_to_be_grouped)
 
     """
-    Sort named submissions, in order of number of comments associated with
+    Sort named submissions, in order of number of titles associated with
     each name.
     """
-    flattened.sort(
-        key=lambda named_submission: len(named_submission['comments']),
+    grouped.sort(
+        key=lambda named_submission: len(named_submission['titles']),
         reverse=True)
 
     """
@@ -88,27 +95,22 @@ def perform_name_extraction(submissions, output_path):
 
 def extract_names(submission):
     submission['names'] = naive_name_detector(submission['title'])
-
-    """
-    Create a field for comments,
-    and treat title as a comment (for simplicity)
-    """
-    submission['comments'] = [submission['title']]
-    del submission['title']
-
-    submission['ids'] = [submission['id']]
-    del submission['id']
-
     return submission
 
 
-def flatten(uniq_data_so_far, next_data):
+def prepare_for_grouping(submission):
+    return dict(titles=list(submission['title']),
+                ids=list(submission['id']),
+                name=submission['name'])
+
+
+def group(uniq_data_so_far, next_data):
     data_to_be_compared = uniq_data_so_far[-1]
 
     if data_to_be_compared['name'] != next_data['name']:
         uniq_data_so_far.append(next_data)
         return uniq_data_so_far
     else:
-        data_to_be_compared['comments'].append(next_data['comments'][0])
+        data_to_be_compared['titles'].append(next_data['titles'][0])
         data_to_be_compared['ids'].append(next_data['ids'][0])
         return uniq_data_so_far
