@@ -65,7 +65,7 @@ def perform_name_extraction(submissions, output_path):
     ready_to_be_grouped = [prepare_for_grouping(submission)
                            for submission in sorted_submissions]
 
-    ready_to_be_grouped[0] = list(ready_to_be_grouped[0])
+    ready_to_be_grouped[0] = [ready_to_be_grouped[0]]
 
     grouped = reduce(group, ready_to_be_grouped)
 
@@ -90,8 +90,8 @@ def extract_names(submission):
 
 
 def prepare_for_grouping(submission):
-    return dict(titles=list(submission['title']),
-                ids=list(submission['id']),
+    return dict(titles=[submission['title']],
+                ids=[submission['id']],
                 name=submission['name'])
 
 
