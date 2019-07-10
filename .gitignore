@@ -1,4 +1,7 @@
 #ignoring __pycache__ files
-*/__pycache__
+__pycache__
 *.py.swp
 results.json
+.vscode
+venv
+node_modules

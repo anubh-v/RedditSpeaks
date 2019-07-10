@@ -1,6 +1,5 @@
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from nltk.stem import LancasterStemmer
 import string
 
 # return an array of tokens (with stopwords and punctuation filtered, stemed)
@@ -16,9 +15,9 @@ def tokenize(sentence):
 
     stop_words = list(stopwords.words('english')) + MISC_STOPWORDS
 
-    tokens = [w for w in tokens if not w in stop_words]
+    tokens = [w for w in tokens if w not in stop_words]
 
     punctSet = list(string.punctuation)
-    tokens = [w for w in tokens if not w in punctSet]
+    tokens = [w for w in tokens if w not in punctSet]
 
     return tokens

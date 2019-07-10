@@ -1,7 +1,6 @@
 from psaw import PushshiftAPI
 import datetime as dt
 import nltk
-import json
 from modules.tokenizer import tokenize
 from modules.objectify import make_object_array
 
