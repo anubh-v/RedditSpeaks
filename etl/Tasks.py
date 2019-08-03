@@ -5,7 +5,7 @@ This module provides methods to perform extract names from Reddit submissions.
 from functools import reduce
 import json
 
-from etl.Heuristics import naive_name_detector
+from etl.Heuristics import naive_name_detector, action_phrase_detector
 
 
 def perform_name_extraction(submissions, output_path):
@@ -119,3 +119,19 @@ def does_not_have_short_names(submission):
 
 def has_name(submission):
     return len(submission['names']) != 0
+
+
+def perform_action_phrase_extraction(submissions):
+    return map(extract_action_phrases, submissions)
+
+
+def extract_action_phrases(submission):
+    action_phrases = []
+
+    for title in submission['titles']:
+        name = submission['name']
+        action_phrases.extend(action_phrase_detector(title, name))
+
+    submission['action_phrases'] = action_phrases
+
+    return submission
