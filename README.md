@@ -25,14 +25,6 @@ pip3 install -r requirements.txt
 python3 run_app.py
 ```
 
-### client side(run on port 3000)
-```sh
-cd client
-npm install
-npm run start
-```
-
-
 ## Usage of `cli.py`
 
 `cli.py` is meant for performing NLP tasks from command line.
