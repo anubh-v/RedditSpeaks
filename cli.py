@@ -20,7 +20,7 @@ python cli.py names --input <path to input file> --output <path to output file>
 import argparse
 import json
 
-from etl import Client, Tasks
+from etl import Client, Tasks, Util, WordCloud
 
 
 def pull_data(context):
@@ -52,6 +52,14 @@ def extract_action_phrases(context):
 
     extracted = Tasks.perform_action_phrase_extraction(data_generator)
     Client.write(extracted, output_path)
+
+
+def make_local_wordcloud(context):
+    names_filepath = context.input
+    with open(names_filepath) as infile:
+        names_data = json.load(infile)
+        frequencies = Util.get_frequencies(names_data)
+        WordCloud.make_image(frequencies)
 
 
 if __name__ == "__main__":
@@ -103,6 +111,13 @@ if __name__ == "__main__":
                               help='a location for storing results')
 
     name_command.set_defaults(handler=extract_action_phrases)
+
+    view_command = subparsers.add_parser('view')
+    view_command.add_argument('--input', type=str, required=True,
+                              help='a path to the file containing \
+                                    extracted names')
+
+    view_command.set_defaults(handler=make_local_wordcloud)
 
     """
     Parse the user input into a "context" object that encapsulates
