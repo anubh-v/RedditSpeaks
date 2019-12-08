@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
-from flask import render_template
 from flask_cors import CORS
 from modules.extract import extract_data
+import os
 
 # instantiate the app
 app = Flask(__name__)
@@ -25,6 +25,6 @@ def getfreqDist():
 
 @app.route("/")
 def entry():
-    data = extract_data()
-    return render_template("index.html", data=data)
-    # return extract_data()
+    data_dir = "../data"
+    print(os.getcwd())
+    return jsonify(os.listdir(data_dir))
