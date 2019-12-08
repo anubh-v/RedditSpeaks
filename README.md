@@ -56,7 +56,7 @@ Next, to generate a wordlcoud, run:
 
 Below is the word cloud generated for this time period:
 
-![Word cloud from a Reddit forum about US news, over the last week of Sept 2018](visuals/politicsEarlyMarch2018.jpg)
+![Word cloud from a Reddit forum about US news, over the last week of Sept 2018](docs/visuals/politicsEarlyMarch2018.jpg)
 
 | Name       | Number of associated titles | 
 | ------------- |-----:|
