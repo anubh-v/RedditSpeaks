@@ -4,15 +4,12 @@
 
 Reddit is a platform for hosting interest or place based communities.
 
-RedditSpeaks is a project about extracting results and relationships from the data available on Reddit.
+RedditSpeaks is a project about extracting information from news articles shared on Reddit.
 
-Problem areas being considered:
-- Identifying trends across time in various Reddit communities
-- Tracking the popularity of various topics across geospatial boundaries
-- Tracking community activity over time
+Currently, RedditSpeaks can identify the most common names mentioned in news
+headlines.
 
 View some results [here](docs/results.md)
-
 
 ## Install
 
@@ -57,7 +54,9 @@ Next, to extract names, run:
 Next, to generate a wordlcoud, run:
 `python cli.py view --input names.json`
 
-In this example, the following are the top 10 extracted names:
+Below is the word cloud generated for this time period:
+
+![Word cloud from a Reddit forum about US news, over the last week of Sept 2018](visuals/politicsEarlyMarch2018.jpg)
 
 | Name       | Number of associated titles | 
 | ------------- |-----:|
