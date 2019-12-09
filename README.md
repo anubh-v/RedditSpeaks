@@ -22,17 +22,17 @@ pip install -r requirements.txt
 To download submissions from [r/politics](https://www.reddit.com/r/politics/) 
 between 1 March 2019 and 2 March 2019, run: 
 ```
-python cli.py pull politics --start 2019 3 1 --end 2019 3 2 --output politics.json`
+python cli.py pull politics --start 2019 3 1 --end 2019 3 2 --output politics.json
 ```
 
 Next, to extract names, run:
 ```
-python cli.py names --input politics.json --output names.json`
+python cli.py names --input politics.json --output names.json
 ```
 
 Next, to generate a wordlcoud, run:
 ```
-python cli.py view --input names.json`
+python cli.py view --input names.json
 ```
 Below is the word cloud generated for this time period:
 
