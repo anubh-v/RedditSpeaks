@@ -72,10 +72,7 @@ if __name__ == "__main__":
     # The user must specify a command
     subparsers.required = True
 
-    """
-    Create a parser for the "names" command,
-    and associate it with the extract_names_command function
-    """
+    # Create a parser for the "names" command.
     name_command = subparsers.add_parser('names')
     name_command.add_argument('--input', type=str, required=True,
                               help='a path to a file containing \
@@ -86,9 +83,7 @@ if __name__ == "__main__":
 
     name_command.set_defaults(handler=extract_names)
 
-    """ Create a parser for the "pull" command,
-    and associate it with the pull_data_command function
-    """
+    # Create a parser for the "pull" command.
     pull_command = subparsers.add_parser('pull')
     pull_command.add_argument('subreddit', type=str,
                               help="a subreddit's name")
@@ -98,20 +93,7 @@ if __name__ == "__main__":
     pull_command.add_argument('--output', type=str, required=True)
     pull_command.set_defaults(handler=pull_data)
 
-    """
-    Create a parser for the "action phrases" command,
-    and associate it with the extract_action_phrases function
-    """
-    name_command = subparsers.add_parser('actions')
-    name_command.add_argument('--input', type=str, required=True,
-                              help='a path to a file containing \
-                                    downloaded reddit data')
-
-    name_command.add_argument('--output', type=str, required=True,
-                              help='a location for storing results')
-
-    name_command.set_defaults(handler=extract_action_phrases)
-
+    # Create parser for the "view" command.
     view_command = subparsers.add_parser('view')
     view_command.add_argument('--input', type=str, required=True,
                               help='a path to the file containing \
