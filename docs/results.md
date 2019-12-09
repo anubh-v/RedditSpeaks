@@ -1,5 +1,3 @@
-All wordclouds are generated using [ZingChart](https://www.zingchart.com/buy/)
-
 A Reddit forum about college applications, over Nov 2018 - Dec 2018:
 ![Word cloud from a Reddit forum about college applications, over Nov 2018 - Dec 2018](visuals/collegeNovDec2018.png)
 
