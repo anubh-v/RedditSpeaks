@@ -51,10 +51,15 @@ Current commands:
 
 
 To download Reddit submissions, run:
-`python cli.py pull <subreddit name> --start <year, month, day> --end <year, month, day> --output <path to output file>`
+```
+python cli.py pull <subreddit name> --start <year, month, day> --end <year, month, day> --output <path to output file>`
+```
 
 To extract names from these downloaded submissions, run:
-`python cli.py names --input <path to input file> --output <path to output file>`
-
+```
+python cli.py names --input <path to input file> --output <path to output file>`
+```
 To generate a wordcloud displaying these extracted names, run:
-`python cli.py view --input <path to json file containing extracted names>`
+```
+python cli.py view --input <path to json file containing extracted names>
+```
