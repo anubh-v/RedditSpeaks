@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Abstraction-Support-Group/RedditSpeaks.svg?branch=master)](https://travis-ci.org/Abstraction-Support-Group/RedditSpeaks)
+[![Build Status](https://travis-ci.org/anubh-v/RedditSpeaks.svg?branch=master)](https://travis-ci.org/anubh-v/RedditSpeaks)
 
 # RedditSpeaks - Find out what Reddit is saying
 
